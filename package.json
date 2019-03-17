@@ -9,9 +9,7 @@
     "sequelize-cli": "^5.4.0"
   },
   "scripts": {
-    "server": "node server.js",
-    "client": "cd client && npm run start",
-    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "start": "node server.js",
     "build": "cd client && npm run build",
     "deploy": "yarn build && git add . && git commit -m \"Building for production\" && git push heroku master",
     "test": "echo \"Error: no test specified\" && exit 1",
