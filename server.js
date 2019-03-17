@@ -27,34 +27,6 @@ app.use(bodyParser.json());
 //app.use(express.static("client/build"));
 //app.use(routes);
 
-// Set up promises with mongoose
-mongoose.Promise = global.Promise;
-
-// Declare Mongoose Connection Parameters
-
-// "mongodb://heroku_cwf2cqkx:8vpi8pekalrvhlae96mahc4ktq@ds153494.mlab.com:53494/heroku_cwf2cqkx"
-
-//  'mongodb://localhost/hangman_options' ||
-
-let mongoConnect = 'mongodb://localhost/react-template-with-auth'
-// Connect to the Mongo DB
-mongoose.connect(
-  mongoConnect, {
-    useMongoClient: true
-  }
-);
-
-const db = mongoose.connection;
-
-// Show any mongoose errors
-db.on("error", function (error) {
-  console.log("Mongoose Error: ", error);
-});
-
-// Once logged in to the db through mongoose, log a success message
-db.once("open", function () {
-  console.log(`Mongoose connection to ${mongoConnect} successful.`);
-});
 
 
 // SQL DB Connection
@@ -81,9 +53,7 @@ estSQLCon = (env) => {
     return prod_sequelize 
   }
 }
-console.log(process.env.NODE_ENV)
-console.log(process.env.NODE_ENV==='development') 
-console.log(typeof process.env.NODE_ENV)
+
 //const sequelize = estSQLCon(process.env.NODE_ENV)
 
 const sequelize = new Sequelize(process.env.JAWSDB_URL, {dialect:'mysql'})
@@ -104,6 +74,24 @@ sequelize
   //   dialect: 'mysql'
   // })
   
+// const knex = require('knex')({
+//   client: 'mysql2',
+//   connection: process.env.JAWSDB_URL,
+//   pool:{
+//     afterCreate: (conn,done)=>{
+//       conn.query('SET timezone="EST";',(err)=>{
+//         if (err){
+//            // first query failed, return error and don't try to make next query
+//            done(err, conn);
+//         } else {
+//           console.log("Knex is performing handshake")
+//         }
+//       })
+      
+//     }
+//   }
+// });
+// knex;
 
 
 
